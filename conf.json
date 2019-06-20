@@ -1,0 +1,22 @@
+{
+    "_comment":"key of response is dsp id.",
+    "responses":{
+	"19":{
+	    "_comment":"from_request key is key of json request value is json response key",
+	    "from_request":{
+		"impid":"impid"
+	    },
+	    "response": {
+		"seatbid":[
+		    {
+			"bid":[
+			    {
+				"impid":"{{.impid}}"
+			    }
+			]
+		    }
+		]
+	    }
+	}
+    }
+}
