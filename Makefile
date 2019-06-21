@@ -3,7 +3,7 @@ REVISION := $(shell git rev-parse --short HEAD)
 
 LDFLAGS := -X 'main.revision=$(REVISION)'
 
-.PHONY: setup fmt
+.PHONY: setup fmt curl
 
 ## Setup
 setup:
@@ -17,3 +17,7 @@ fmt:
 ## Run Run away
 run:
 	go run cmd/main.go
+
+## curl
+curl:
+	curl -X POST localhost:8080/mockDSPs/19 -d '$(shell cat testRequest.json | jq -c)' -vvv

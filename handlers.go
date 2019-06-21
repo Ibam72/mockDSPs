@@ -1,7 +1,7 @@
 package mockdsps
 
 import(
-	//"encoding/json"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"io/ioutil"
@@ -13,43 +13,87 @@ import(
 	"github.com/julienschmidt/httprouter"
 )
 
-// Bidding response bid
-func Bidding(w http.ResponseWriter, r *http.Request, ps httprouter.Params){
+// POSTBidding response bid
+func POSTBidding(w http.ResponseWriter, r *http.Request, ps httprouter.Params){
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, replaceMacro(string(getResponses(19))))
-	fmt.Printf("Todo show %s", ps.ByName("dsp_id"))
+	dspID := ps.ByName("dsp_id")
+	body := getBody(r)
+	reqMap := map[string]interface{}{}
+	if err := json.Unmarshal([]byte(body), &reqMap); err != nil {
+		fmt.Println(err)
+    }
+	fmt.Fprintf(w, replaceMacro(dspID, reqMap))
+	fmt.Fprintf(w, "\n")
+	fmt.Printf("RequestBody: %s\n", body)
+	fmt.Fprintf(w, getBody(r))
 }
 
-func getResponses(dspid int) []byte {
+func getJSON(strJSON []byte) *simplejson.Json{
+	ret := simplejson.New()
+	err := ret.UnmarshalJSON(strJSON)
+	    if err != nil {
+        fmt.Println(err.Error())
+        os.Exit(1)
+    }
+	return ret
+}
+
+func getConfJSON() *simplejson.Json {
 	raw, err := ioutil.ReadFile("./conf.json")
     if err != nil {
         fmt.Println(err.Error())
         os.Exit(1)
     }
-	json := simplejson.New()
-	err = json.UnmarshalJSON(raw)
+	return getJSON(raw)
+}
+
+func getBody(r *http.Request) string {
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(r.Body)
+	return buf.String()
+}
+
+func templateFileName(dspid string) string {
+	return "./responses/" + dspid + ".template"
+}
+func getResponseTemplate(dspid string) []byte {
+	ret, err := ioutil.ReadFile(templateFileName(dspid))
     if err != nil {
         fmt.Println(err.Error())
-        os.Exit(1)
+		return nil
     }
-	ret , _ := json.Get("responses").Get("19").Get("response").Encode()
 	return ret
 }
 
-func replaceMacro(replaced string) string {
+func replaceMacro(dspID string,reqMap map[string]interface{}) string {
 	var wr bytes.Buffer
-	t, err := template.New("response").Parse(replaced)
+	t, err := template.New("response").Funcs(funcMap()).Parse(string(getResponseTemplate(dspID)))
     if err != nil {
         fmt.Println(err.Error())
-        os.Exit(1)
+        return ""
     }
-	err = t.Execute(&wr, map[string]string{
-		"impid": "hogehoge",
-	})
+	fmt.Println(funcMap())
+	err = t.Execute(&wr, reqMap)
 	if err != nil {
 		fmt.Println(err.Error())
-		os.Exit(1)
+		return ""
 	}
 	return wr.String()
+}
+
+func funcMap() template.FuncMap{
+	return template.FuncMap{
+		"isEndArray": isEndArray,
+		"payload": payload,
+		"dec": func(i int) int {return i - 1;},
+	}
+}
+
+func payload(request string) string {
+	return request	
+}
+
+func isEndArray(index int,array []interface{}) bool {
+	return len(array) == (index + 1)
 }

@@ -10,6 +10,6 @@ import (
 
 func main() {
 	router := httprouter.New()
-	router.GET("/mockDSPs/:dsp_id", mockdsps.Bidding)
+	router.POST("/mockDSPs/:dsp_id", mockdsps.POSTBidding)
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
