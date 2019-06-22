@@ -1,0 +1,26 @@
+{
+	"id":"{{ .id }}",
+    {{range $i, $imp := .imp}}
+	"seatbid":[
+		{
+            {{with $native_impids := index $imp.native.impids 1}}
+            {{with $request := index $imp.native.ext.sub_requests 0}}
+			"bid":[
+                {{range $i, $impid := $native_impids}}
+				{
+					"impid":"{{ $impid }}",
+					"price":5.55,
+					"nurl":"http://geniee.com/winnotice?hogefuga1",
+					"adomain":["geniee.com"],
+					"cid":"campaign101",
+					"crid":"creative201",
+					"adm": {{ payload $request }}
+				}{{if eq (isEndArray $i $native_impids) false }},{{ end }}
+                {{ end }}
+			]
+            {{ end }}
+            {{ end }}
+		}
+    {{ end }}
+	]
+}

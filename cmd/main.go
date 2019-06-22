@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/julienschmidt/httprouter"
 	"github.com/Ibam72/mockdsps"
+	"github.com/julienschmidt/httprouter"
 )
 
 func main() {

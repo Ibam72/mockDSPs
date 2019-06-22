@@ -1,0 +1,97 @@
+{
+  "native": {
+    "link": {
+      "url": "http://geniee.co.jp/test_click_url.com"
+    },
+    "assets": [
+      {{ if isRequireAsset 1 .assets }}
+      {
+        "id": 1,
+        "title": {
+          "text": "Test Lamp title"
+        }
+      },
+      {{ end }}
+      {{ if isRequireAsset 2 .assets }}
+      {
+        "id": 2,
+        "img": {
+          "url": "https://geniee.co.jp/icon_image.jpg"
+        }
+      },
+      {{ end }}
+      {{ if isRequireAsset 3 .assets }}
+      {
+        "id": 3,
+        "img": {
+          "url": "https://geniee.co.jp/main_image.jpg"
+        }
+      },
+      {{ end }}
+      {{ if isRequireAsset 4 .assets }}
+      {
+        "id": 4,
+        "data": {
+          "value": "Test Lamp advertiser"
+        }
+      },
+      {{ end }}
+      {{ if isRequireAsset 5 .assets }}
+      {
+        "id": 5,
+        "data": {
+          "value": "Test Lamp description"
+        }
+      },
+      {{ end }}
+      {{ if isRequireAsset 6 .assets }}
+      {
+        "id": 6,
+        "data": {
+          "value": "Test Lamp call to action"
+        }
+      },
+      {{ end }}
+      {{ if isRequireAsset 13 .assets }}
+      {
+        "id": 13,
+        "video": {
+          "vasttag": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><VAST version=\"3.0\">  <Ad id=\"{LAMP_AD_ID}\">    <InLine>      <AdSystem version=\"1.0\">gns</AdSystem>      <AdTitle>gns videoad</AdTitle>      <Error><![CDATA[{LAMP_VIDEOTRACKER_ERROR_URL}]]></Error>      <Impression><![CDATA[{LAMP_VIDEOTRACKER_START_URL}]]></Impression>      <Creatives>        <Creative id=\"{LAMP_CREATIVE_ID}\" AdID=\"{LAMP_AD_ID}_1\" sequence=\"1\">          <Linear skipoffset=\"{LAMP_VIDEO_CREATIVE_SKIPOFFSET}\">            <Duration>{LAMP_VIDEO_CREATIVE_DURATION}</Duration>            <MediaFiles>              <MediaFile id=\"{LAMP_VIDEO_ID}\" delivery=\"progressive\" type=\"{LAMP_VIDEO_CREATIVE_MIMETYPE}\" bitrate=\"{LAMP_VIDEO_CREATIVE_BITRATE}\" width=\"{LAMP_VIDEO_CREATIVE_WIDTH}\" height=\"{LAMP_VIDEO_CREATIVE_HEIGHT}\">                <![CDATA[{LAMP_VIDEO_CREATIVE_CDN_URL}]]>              </MediaFile>            </MediaFiles>            <TrackingEvents>                <Tracking event=\"firstQuartile\"><![CDATA[{LAMP_VIDEOTRACKER_25%_URL}]]></Tracking>                <Tracking event=\"midpoint\"><![CDATA[{LAMP_VIDEOTRACKER_50%_URL}]]></Tracking>                <Tracking event=\"thirdQuartile\"><![CDATA[{LAMP_VIDEOTRACKER_75%_URL}]]></Tracking>                <Tracking event=\"complete\"><![CDATA[{LAMP_VIDEOTRACKER_100%_URL}]]></Tracking>            </TrackingEvents>            <VideoClicks>              <ClickThrough><![CDATA[{LAMP_CLICK_URL}]]></ClickThrough>            </VideoClicks>          </Linear>        </Creative>      </Creatives>    </InLine>  </Ad></VAST>"
+        }
+      },
+      {{ end }}
+      {{ if isRequireAsset 14 .assets }}
+      {
+        "id": 14,
+        "data": {
+          "value": "nativeVideo_1"
+        }
+      },
+      {{ end }}
+      {{ if isRequireAsset 15 .assets }}
+      {
+        "id": 15,
+        "data": {
+          "value": "https://optout_url/"
+        }
+      },
+      {{ end }}
+      {{ if isRequireAsset 16 .assets }}
+      {
+        "id": 16,
+        "data": {
+          "value": "Test Lamp optout text"
+        }
+      },
+      {{ end }}
+      {{ if isRequireAsset 17 .assets }}
+      {
+        "id": 17,
+        "data": {
+          "value": "https://optout/image.jpg"
+        }
+      }
+      {{ end }}
+    ]
+  }
+}

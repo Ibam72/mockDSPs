@@ -20,4 +20,4 @@ run:
 
 ## curl
 curl:
-	curl -X POST localhost:8080/mockDSPs/19 -d '$(shell cat testRequest.json | jq -c)' -vvv
+	curl -X POST localhost:8080/mockDSPs/19 -d '$(shell cat testRequest.json | jq -c)' | jq

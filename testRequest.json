@@ -17,15 +17,13 @@
             },
             "native":{                
                 "battr": [ 12,13 ],
-                "request":"{plcmtcnt:3,assets:[{id:1,required:1,title:{len:32}},{id:2,required:1,img:{type:3,wmin:320,hmin:250,mimes:[image/jpeg]}},{id:3,required:1,img:{type:1,wmin:64,hmin:64,mimes:[image/jpeg]}},{id:4,required:1,data:{type:12,len:16}},{id:5,required:1,data:{type:2,len:128}},{id:6,required:1,data:{type:600,ext:{id:aladdin_item_format_id}}},{id:7,required:1,video:{mimes:[video/mp4],protocols:[3],w:1920,h:1080,delivery:[2]}},{id:8,required:0,data:{type:601}},{id:9,required:0,data:{type:602}},{id:10,required:0,data:{type:603}}]}",
+                "request":"{\"plcmtcnt\":3,\"assets\":[{\"id\":1,\"required\":1,\"title\":{\"len\":20}},{\"id\":2,\"required\":1,\"img\":{\"type\":1,\"wmin\":75,\"hmin\":75,\"mimes\":[\"image/png\",\"image/jpeg\"]}},{\"id\":3,\"required\":1,\"img\":{\"type\":3,\"wmin\":480,\"hmin\":320,\"mimes\":[\"image/png\",\"image/jpeg\"]}},{\"id\":5,\"required\":1,\"data\":{\"type\":2,\"len\":50}},{\"id\":6,\"required\":1,\"data\":{\"type\":12,\"len\":30}},{\"id\":14,\"required\":1,\"data\":{\"type\":600,\"ext\":{\"id\":\"nativeNormal_0\"}}},{\"id\":15,\"required\":0,\"data\":{\"type\":601}},{\"id\":16,\"required\":0,\"data\":{\"type\":602}},{\"id\":17,\"required\":0,\"data\":{\"type\":603}}]}",
                 "ext": {
                     "sub_requests": [
-			"{plcmtcnt:3,assets:[{id:1,required:1,title:{len:32}},{id:2,required:1,img:{type:3,wmin:320,hmin:250,mimes:[image/jpeg]}},{id:3,required:1,img:{type:1,wmin:64,hmin:64,mimes:[image/jpeg]}},{id:4,required:1,data:{type:12,len:16}},{id:5,required:1,data:{type:2,len:128}},{id:6,required:1,data:{type:600,ext:{id:aladdin_item_format_id}}},{id:7,required:1,video:{mimes:[video/mp4],protocols:[3],w:1920,h:1080,delivery:[2]}},{id:8,required:0,data:{type:601}},{id:9,required:0,data:{type:602}},{id:10,required:0,data:{type:603}}]}"
-                    ]},
+"{\"plcmtcnt\":1,\"assets\":[{\"id\":1,\"required\":1,\"title\":{\"len\":20}},{\"id\":2,\"required\":1,\"img\":{\"type\":1,\"wmin\":100,\"hmin\":100,\"mimes\":[\"image/png\",\"image/jpeg\"]}},{\"id\":3,\"required\":1,\"img\":{\"type\":3,\"wmin\":1200,\"hmin\":768,\"mimes\":[\"image/png\",\"image/jpeg\"]}},{\"id\":4,\"required\":1,\"data\":{\"type\":1,\"len\":30}},{\"id\":5,\"required\":1,\"data\":{\"type\":2,\"len\":40}},{\"id\":6,\"required\":1,\"data\":{\"type\":12,\"len\":10}},{\"id\":13,\"required\":1,\"video\":{\"mimes\":[\"video/mp4\"],\"protocols\":[3],\"w\":600,\"h\":900,\"delivery\":[2]}},{\"id\":14,\"required\":1,\"data\":{\"type\":600,\"ext\":{\"id\":\"nativeVideo_0\"}}},{\"id\":15,\"required\":0,\"data\":{\"type\":601}},{\"id\":16,\"required\":0,\"data\":{\"type\":602}},{\"id\":17,\"required\":0,\"data\":{\"type\":603}}]}"                    ]},
                 "impids": [
                     ["IMP_ID1", "IMP_ID2", "IMP_ID3"],
-                    ["IMP_ID4", "IMP_ID5", "IMP_ID6"],
-                    ["IMP_ID7"]
+                    ["IMP_ID4", "IMP_ID5", "IMP_ID6"]
                 ]
             }
         }
