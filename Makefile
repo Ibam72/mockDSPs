@@ -1,6 +1,4 @@
 REVISION := $(shell git rev-parse --short HEAD)
-
-
 LDFLAGS := -X 'main.revision=$(REVISION)'
 
 .PHONY: setup fmt curl
@@ -20,4 +18,10 @@ run:
 
 ## curl
 curl:
-	curl -X POST localhost:8080/mockDSPs/19 -d '$(shell cat testRequest.json | jq -c)' | jq
+	curl -X POST localhost:11115/mockDSPs/19 -d '$(shell cat testRequest.json | jq -c)' | jq
+
+BINDIR=./bin
+## build linux binary
+build-linux:
+	mkdir -p $(BIN)/linux
+	GOOS=linux GOARCH=amd64 $(GOBUILD) -ldflags "$(LDFLAGS)" -o $(releaseBINDIR)/$(HoneyCat) cmd/$(HoneyCat)/main.go

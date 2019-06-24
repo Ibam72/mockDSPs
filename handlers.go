@@ -15,7 +15,7 @@ import (
 func POSTBidding(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, makeResponse(ps.ByName("dsp_id"), getMap(getBody(r))))
+	fmt.Fprintf(w, string(formatJSONStr(buildTemplate(ps.ByName("dsp_id"), getMap(getBody(r)), funcMap()))))
 	fmt.Fprintf(w, "\n")
 }
 
@@ -47,28 +47,6 @@ func getTemplate(name string) []byte {
 	return ret
 }
 
-func makeResponse(dspID string, reqMap map[string]interface{}) string {
-	return string(formatJSONStr(buildTemplate(dspID, reqMap, funcMap())))
-}
-
-func funcMap() template.FuncMap {
-	return template.FuncMap{
-		"isEndArray":     isEndArray,
-		"payload":        payload,
-		"dec":            func(i int) int { return i - 1 },
-		"isRequireAsset": isRequireAsset,
-	}
-}
-
-func isRequireAsset(id int, assets []interface{}) bool {
-	for _, asset := range assets {
-		if int(asset.(map[string]interface{})["id"].(float64)) == id {
-			return true
-		}
-	}
-	return false
-}
-
 func formatJSONStr(in string) []byte {
 	buf := map[string]interface{}{}
 	if err := json.Unmarshal([]byte(in), &buf); err != nil {
@@ -94,9 +72,17 @@ func buildTemplate(tmpl string, replaceMap map[string]interface{}, funcs templat
 		return ""
 	}
 	return wr.String()
-
 }
 
+func funcMap() template.FuncMap {
+	return template.FuncMap{		
+		"isEndArray":     func(i int,a []interface{}) bool {return len(a) == (i + 1)},
+		"payload":        payload,
+		"dec":            func(i int) int { return i - 1 },
+		"isRequireAsset": isRequireAsset,
+	}
+}
+ 
 func payload(request string) string {
 	adm := buildTemplate("nativeAdm", getMap(request), funcMap())
 	bytes, err := json.Marshal(string(formatJSONStr(adm)))
@@ -106,6 +92,11 @@ func payload(request string) string {
 	return string(bytes)
 }
 
-func isEndArray(index int, array []interface{}) bool {
-	return len(array) == (index + 1)
+func isRequireAsset(id int, assets []interface{}) bool {
+	for _, asset := range assets {
+		if int(asset.(map[string]interface{})["id"].(float64)) == id {
+			return true
+		}
+	}
+	return false
 }
