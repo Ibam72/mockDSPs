@@ -1,20 +1,20 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
-	"fmt"
 	"os"
 
 	"github.com/Ibam72/mockdsps"
-	"github.com/julienschmidt/httprouter"
 	flags "github.com/jessevdk/go-flags"
+	"github.com/julienschmidt/httprouter"
 )
 
 // Options is commandline options
 type Options struct {
-	Revision  bool     `short:"r" long:"revision" description:"Show revision information"`
-	Port      string   `short:"p" long:"port" description:"port" default:"11115"`
+	Revision bool   `short:"r" long:"revision" description:"Show revision information"`
+	Port     string `short:"p" long:"port" description:"port" default:"11115"`
 }
 
 func (o Options) port() string {

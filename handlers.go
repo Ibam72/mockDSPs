@@ -75,14 +75,14 @@ func buildTemplate(tmpl string, replaceMap map[string]interface{}, funcs templat
 }
 
 func funcMap() template.FuncMap {
-	return template.FuncMap{		
-		"isEndArray":     func(i int,a []interface{}) bool {return len(a) == (i + 1)},
+	return template.FuncMap{
+		"isEndArray":     func(i int, a []interface{}) bool { return len(a) == (i + 1) },
 		"payload":        payload,
 		"dec":            func(i int) int { return i - 1 },
 		"isRequireAsset": isRequireAsset,
 	}
 }
- 
+
 func payload(request string) string {
 	adm := buildTemplate("nativeAdm", getMap(request), funcMap())
 	bytes, err := json.Marshal(string(formatJSONStr(adm)))

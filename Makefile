@@ -1,5 +1,7 @@
+NAME := MATERIALCOLOR
 REVISION := $(shell git rev-parse --short HEAD)
 LDFLAGS := -X 'main.revision=$(REVISION)'
+TEMPLATEDIR := ./template
 
 .PHONY: setup fmt curl
 
@@ -21,7 +23,13 @@ curl:
 	curl -X POST localhost:11115/mockDSPs/19 -d '$(shell cat testRequest.json | jq -c)' | jq
 
 BINDIR=./bin
+LINUX=$(BINDIR)/linux
 ## build linux binary
 build-linux:
-	mkdir -p $(BIN)/linux
-	GOOS=linux GOARCH=amd64 $(GOBUILD) -ldflags "$(LDFLAGS)" -o $(releaseBINDIR)/$(HoneyCat) cmd/$(HoneyCat)/main.go
+	mkdir -p $(LINUX)
+	GOOS=linux GOARCH=amd64 go build -ldflags "$(LDFLAGS)" -o $(LINUX)/$(NAME) cmd/main.go
+	cp -r $(TEMPLATEDIR) $(LINUX)/$(TEMPLATEDIR)
+	cp Makefile $(LINUX)/Makefile
+
+linux-run:
+	./$(NAME) -p 14514
