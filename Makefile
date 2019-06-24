@@ -23,7 +23,7 @@ curl:
 	curl -X POST localhost:11115/mockDSPs/19 -d '$(shell cat testRequest.json | jq -c)' | jq
 ## curl fenrir
 curl-fenrir:
-	curl -X POST fenrir:14514/mockDSPs/19 -d '$(shell cat testRequest.json | jq -c)' | jq
+	curl -X POST fenrir:19191/19 -d '$(shell cat testRequest.json | jq -c)' | jq
 
 BINDIR=./bin
 LINUX=$(BINDIR)/linux
@@ -39,7 +39,7 @@ scp: build-linux
 	scp -r $(LINUX) fenrir:~/$(NAME)
 
 linux-run:
-	./$(NAME) -p 11451
+	./$(NAME) -p 19191
 
 clean:
 	rm -rf $(BINDIR)
