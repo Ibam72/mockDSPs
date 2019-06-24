@@ -3,7 +3,7 @@ REVISION := $(shell git rev-parse --short HEAD)
 LDFLAGS := -X 'main.revision=$(REVISION)'
 TEMPLATEDIR := ./template
 
-.PHONY: setup fmt curl
+.PHONY: setup fmt curl build-linux scp linux-run clean
 
 ## Setup
 setup:
@@ -21,6 +21,9 @@ run:
 ## curl
 curl:
 	curl -X POST localhost:11115/mockDSPs/19 -d '$(shell cat testRequest.json | jq -c)' | jq
+## curl fenrir
+curl-fenrir:
+	curl -X POST fenrir:14514/mockDSPs/19 -d '$(shell cat testRequest.json | jq -c)' | jq
 
 BINDIR=./bin
 LINUX=$(BINDIR)/linux
@@ -31,5 +34,12 @@ build-linux:
 	cp -r $(TEMPLATEDIR) $(LINUX)/$(TEMPLATEDIR)
 	cp Makefile $(LINUX)/Makefile
 
+scp: build-linux
+	ssh fenrir rm -rf $(NAME)
+	scp -r $(LINUX) fenrir:~/$(NAME)
+
 linux-run:
-	./$(NAME) -p 14514
+	./$(NAME) -p 11451
+
+clean:
+	rm -rf $(BINDIR)

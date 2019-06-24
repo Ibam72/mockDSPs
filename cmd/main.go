@@ -36,6 +36,6 @@ func main() {
 		os.Exit(0)
 	}
 	router := httprouter.New()
-	router.POST("/mockDSPs/:dsp_id", mockdsps.POSTBidding)
+	router.POST("/:dsp_id", mockdsps.POSTBidding)
 	log.Fatal(http.ListenAndServe(opts.port(), router))
 }
