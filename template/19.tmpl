@@ -3,8 +3,8 @@
     {{range $i, $imp := .imp}}
 	"seatbid":[
 		{
-            {{with $native_impids := index $imp.native.ext.impids 0}}
-            {{with $request := $imp.native.request }}
+            {{with $native_impids := index $imp.native.ext.impids 1}}
+            {{with $request := index $imp.native.ext.sub_requests 0}}
 			"bid":[
                 {{range $i, $impid := $native_impids}}
 				{
@@ -14,8 +14,10 @@
 					"cid":"campaign101",
 					"crid":"creative201",
 					"adm": {{ payload $request }},
+					"adomain": ["19.com"],
 					"ext": {
-					       "crtype":"native"
+					       "crtype":"native",
+					       "vendor_id": "1"
 					}
 				}{{if eq (isEndArray $i $native_impids) false }},{{ end }}
                 {{ end }}

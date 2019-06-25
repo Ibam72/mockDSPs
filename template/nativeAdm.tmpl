@@ -4,7 +4,8 @@
       "url": "http://geniee.co.jp/test_click_url.com"
     },
     "assets": [
-      {{ if isRequireAsset 1 .assets }}
+      {{ range $asset := .assets }}
+      {{ if eq $asset.id 1.0 }}
       {
         "id": 1,
         "title": {
@@ -12,7 +13,7 @@
         }
       },
       {{ end }}
-      {{ if isRequireAsset 2 .assets }}
+      {{ if eq $asset.id 2.0 }}
       {
         "id": 2,
         "img": {
@@ -20,7 +21,7 @@
         }
       },
       {{ end }}
-      {{ if isRequireAsset 3 .assets }}
+      {{ if eq $asset.id 3.0 }}
       {
         "id": 3,
         "img": {
@@ -28,7 +29,7 @@
         }
       },
       {{ end }}
-      {{ if isRequireAsset 4 .assets }}
+      {{ if eq $asset.id 4.0 }}
       {
         "id": 4,
         "data": {
@@ -36,7 +37,7 @@
         }
       },
       {{ end }}
-      {{ if isRequireAsset 5 .assets }}
+      {{ if eq $asset.id 5.0 }}
       {
         "id": 5,
         "data": {
@@ -44,7 +45,7 @@
         }
       },
       {{ end }}
-      {{ if isRequireAsset 6 .assets }}
+      {{ if eq $asset.id 6.0 }}
       {
         "id": 6,
         "data": {
@@ -52,7 +53,7 @@
         }
       },
       {{ end }}
-      {{ if isRequireAsset 13 .assets }}
+      {{ if eq $asset.id 13.0 }}
       {
         "id": 13,
         "video": {
@@ -60,15 +61,15 @@
         }
       },
       {{ end }}
-      {{ if isRequireAsset 14 .assets }}
+      {{ if eq $asset.id 14.0 }}
       {
         "id": 14,
         "data": {
-          "value": "nativeVideo_1"
+          "value": "{{ $asset.data.ext.id }}"
         }
       },
       {{ end }}
-      {{ if isRequireAsset 15 .assets }}
+      {{ if eq $asset.id 15.0 }}
       {
         "id": 15,
         "data": {
@@ -76,7 +77,7 @@
         }
       },
       {{ end }}
-      {{ if isRequireAsset 16 .assets }}
+      {{ if eq $asset.id 16.0 }}
       {
         "id": 16,
         "data": {
@@ -84,13 +85,14 @@
         }
       },
       {{ end }}
-      {{ if isRequireAsset 17 .assets }}
+      {{ if eq $asset.id 17.0 }}
       {
         "id": 17,
         "data": {
           "value": "https://optout/image.jpg"
         }
       }
+      {{ end }}
       {{ end }}
     ]
   }

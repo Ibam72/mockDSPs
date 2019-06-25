@@ -20,7 +20,7 @@ func POSTBidding(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func toTmplKey(in string) string {
-	if "in" == "19" {
+	if in == "19" {
 		return in
 	}
 	return "defaultResponse"
@@ -83,11 +83,14 @@ func buildTemplate(tmpl string, replaceMap map[string]interface{}, funcs templat
 func funcMap() template.FuncMap {
 	return template.FuncMap{
 		"isEndArray":     func(i int, a []interface{}) bool { return len(a) == (i + 1) },
-		"payload":        payload,
 		"dec":            func(i int) int { return i - 1 },
-		"isRequireAsset": isRequireAsset,
 		"defaultBannerBid": bannerBid,
+		"payload":        payload,
 	}
+}
+
+func bannerBid() string {
+	return string(formatJSONStr(buildTemplate("defaultBannerBid",nil,nil)))
 }
 
 func payload(request string) string {
@@ -97,17 +100,4 @@ func payload(request string) string {
 		panic(err)
 	}
 	return string(bytes)
-}
-
-func isRequireAsset(id int, assets []interface{}) bool {
-	for _, asset := range assets {
-		if int(asset.(map[string]interface{})["id"].(float64)) == id {
-			return true
-		}
-	}
-	return false
-}
-
-func bannerBid() string {
-	return string(formatJSONStr(buildTemplate("defaultBannerBid",nil,nil)))
 }
