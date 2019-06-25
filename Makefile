@@ -20,7 +20,7 @@ run:
 
 ## curl
 curl:
-	curl -X POST localhost:11115/mockDSPs/19 -d '$(shell cat testRequest.json | jq -c)' | jq
+	curl -X POST localhost:11115/18 -d '$(shell cat testRequest.json | jq -c)' | jq
 ## curl fenrir
 curl-fenrir:
 	curl -X POST fenrir:19191/19 -d '$(shell cat testRequest.json | jq -c)' | jq

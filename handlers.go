@@ -15,10 +15,16 @@ import (
 func POSTBidding(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, string(formatJSONStr(buildTemplate(ps.ByName("dsp_id"), getMap(getBody(r)), funcMap()))))
+	fmt.Fprintf(w, string(formatJSONStr(buildTemplate(toTmplKey(ps.ByName("dsp_id")), getMap(getBody(r)), funcMap()))))
 	fmt.Fprintf(w, "\n")
 }
 
+func toTmplKey(in string) string {
+	if "in" == "19" {
+		return in
+	}
+	return "defaultResponse"
+}
 func getMap(in string) map[string]interface{} {
 	ret := map[string]interface{}{}
 	if err := json.Unmarshal([]byte(in), &ret); err != nil {
@@ -80,6 +86,7 @@ func funcMap() template.FuncMap {
 		"payload":        payload,
 		"dec":            func(i int) int { return i - 1 },
 		"isRequireAsset": isRequireAsset,
+		"defaultBannerBid": bannerBid,
 	}
 }
 
@@ -99,4 +106,8 @@ func isRequireAsset(id int, assets []interface{}) bool {
 		}
 	}
 	return false
+}
+
+func bannerBid() string {
+	return string(formatJSONStr(buildTemplate("defaultBannerBid",nil,nil)))
 }
