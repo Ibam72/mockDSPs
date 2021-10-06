@@ -12,10 +12,57 @@ import (
 )
 
 // POSTBidding response bid
-func POSTBidding(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+func pOSTBidding(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, string(formatJSONStr(buildTemplate(toTmplKey(ps.ByName("dsp_id")), getMap(getBody(r)), funcMap()))))
+	fmt.Fprintf(w, "\n")
+}
+
+func UnicornBidding(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	fmt.Println("------------")
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	fmt.Println(buildTemplate("unicorn", getMap(getBody(r)), funcMap()))
+	fmt.Fprintf(w, string(formatJSONStr(buildTemplate("unicorn", getMap(getBody(r)), funcMap()))))
+	fmt.Fprintf(w, "\n")
+}
+
+func GenieeBidding(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	fmt.Println("------------")
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	wss := buildTemplate("geniee", getMap(getBody(r)), funcMap())
+	fmt.Fprintf(w, string(formatJSONStr(wss)))
+	fmt.Fprintf(w, "\n")
+}
+
+func SpotxBidding(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	fmt.Println("------------")
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	wss := buildTemplate("spotx", getMap(getBody(r)), funcMap())
+	fmt.Fprintf(w, string(formatJSONStr(wss)))
+	fmt.Fprintf(w, "\n")
+}
+
+
+func RubiconBidding(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	fmt.Println("------------")
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	wss := buildTemplate("rubicon", getMap(getBody(r)), funcMap())
+	fmt.Fprintf(w, string(formatJSONStr(wss)))
+	fmt.Fprintf(w, "\n")
+}
+
+
+func NendBidding(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	fmt.Println("------------")
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	wss := buildTemplate("nend", getMap(getBody(r)), funcMap())
+	fmt.Fprintf(w, string(formatJSONStr(wss)))
 	fmt.Fprintf(w, "\n")
 }
 
@@ -23,6 +70,7 @@ func toTmplKey(in string) string {
 	if in == "19" {
 		return in
 	}
+	fmt.Println("----dddddd--------")
 	return "defaultResponse"
 }
 func getMap(in string) map[string]interface{} {
@@ -56,6 +104,7 @@ func getTemplate(name string) []byte {
 func formatJSONStr(in string) []byte {
 	buf := map[string]interface{}{}
 	if err := json.Unmarshal([]byte(in), &buf); err != nil {
+		fmt.Println("json unmarshall err")
 		fmt.Println(err)
 	}
 	ret, err := json.Marshal(buf)
@@ -66,6 +115,7 @@ func formatJSONStr(in string) []byte {
 }
 
 func buildTemplate(tmpl string, replaceMap map[string]interface{}, funcs template.FuncMap) string {
+	fmt.Println(tmpl)
 	var wr bytes.Buffer
 	t, err := template.New(tmpl).Funcs(funcs).Parse(string(getTemplate(tmpl)))
 	if err != nil {

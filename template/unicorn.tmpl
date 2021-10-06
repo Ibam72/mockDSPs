@@ -1,0 +1,34 @@
+
+	{
+		"bidid": "9696f974-ecba-4b3d-850e-6fa61c740b3e",
+		"cur": "JPY",
+		"ext": {},
+		"id": "{{ .id }}",
+		"seatbid": [
+			{
+				"bid": [
+				    {{$first := true}}{{range $i, $imp := .imp}}{{if $first}}{{$first = false}}{{else}},{{end}}
+					{
+						"adid": "BnBuonLE_BnCOb8yU",
+						"adomain": [
+							"unicorn.inc"
+						],
+						"attr": [],
+						"cid": "8515",
+						"crid": "BrTYrzME",
+						"dealid": "geniee58",
+						"ext": {},
+						"id": "1",
+						"impid": "{{ $imp.id }}",
+						"iurl": "",
+						"price": 695
+					}
+					{{ end }}
+				],
+				"group": 0,
+				"seat": "30"
+			}
+		],
+		"units": 0
+	}
+

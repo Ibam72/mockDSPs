@@ -5,8 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-
-	"github.com/Ibam72/mockdsps"
+	"mockdsps"
 	flags "github.com/jessevdk/go-flags"
 	"github.com/julienschmidt/httprouter"
 )
@@ -36,6 +35,10 @@ func main() {
 		os.Exit(0)
 	}
 	router := httprouter.New()
-	router.POST("/:dsp_id", mockdsps.POSTBidding)
+	router.POST("/unicorn", mockdsps.UnicornBidding)
+	router.POST("/geniee", mockdsps.GenieeBidding)
+	router.POST("/spotx", mockdsps.SpotxBidding)
+	router.POST("/rubicon", mockdsps.RubiconBidding)
+	router.POST("/nend", mockdsps.NendBidding)
 	log.Fatal(http.ListenAndServe(opts.port(), router))
 }
