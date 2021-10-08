@@ -1,0 +1,29 @@
+{
+    "id": "{{ .id }}",
+    "bidid": "9696f974-ecba-4b3d-850e-6fa61c740b3e",
+    "cur": "JPY",
+    "seatbid": [
+        {
+            "bid": [
+                {{$first := true}}
+                {{range $i, $imp := .imp}}{{if $first}}{{$first = false}}{{else}},{{end}}
+                {
+                    "id": "c34207df-7b51-40fc-9ef1-a77a0626deca",
+                    "impid": "{{ $imp.id }}",
+                    "adid": "164",
+                    "cid": "8515",
+                    "crid": "409",
+                    "adm":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<VAST xmlns:xsi=\"https://www.w3.org/2001/XMLSchema-instance\" version=\"3.0\" xsi:noNamespaceSchemaLocation=\"vast.xsd\">\n  <Ad id=\"\">\n    <InLine>\n      <AdSystem>Geniee</AdSystem>\n      <Impression></Impression> <!-- 一旦空にする -->\n      <Creatives>\n        <Creative id=\"315\">\n          <Linear>\n            <Duration>00:00:15</Duration>\n            <TrackingEvents>\n              <!-- 一旦空にしてアプリに任せる -->\n            </TrackingEvents>\n            <MediaFiles>\n              <MediaFile delivery=\"progressive\" maintainAspectRatio=\"true\" scalable=\"true\" type=\"video/mp4\" width=\"1920\" height=\"1080\"><![CDATA[https://media.dooh-geniee.jp/path/to/media.mp4]]></MediaFile>\n            </MediaFiles>\n          </Linear>\n        </Creative>\n      </Creatives>\n      <Extensions>\n      </Extensions>\n    </InLine>\n   </Ad>\n</VAST>\n",
+                    "adomain": [],
+                    "cat": [],
+                    "nurl": "http://localhost:11115/geniee",
+                    "dealid": "5ac2d5c8-cbcd-4b2f-9555-28c496b41913",
+                    "w": 1920,
+                    "h": 1080,
+                    "price": 6950
+                }
+                {{end}}
+            ]
+        }
+    ]
+}
